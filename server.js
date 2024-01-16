@@ -1,5 +1,5 @@
-// import http from "http";
 import app from "./src/app.js";
+import "dotenv/config.js";
 
 const port = 8000;
 const routes = {

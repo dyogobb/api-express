@@ -1,9 +1,10 @@
 import express from "express";
 import bodyParser from "body-parser";
 import connectDb from "./config/dbConnect.js";
+import routes from "./routes/index.js";
 
 const app = express();
-
+routes(app)
 //Conexão no banco de dados
 
 app.use(bodyParser.json())
@@ -17,20 +18,6 @@ conexao.once("open", () => {
 })
 
 //Fim conexão no banco de dados
-
-function BuscaLivros(id) {
-    return livros.findIndex(livros => {
-        return livros.id === parseInt(id)
-    })
-}
-
-app.get("/", (req, res) => {
-    res.status(200).send("NodeJs")
-});
-
-app.get("/livros", (req, res) => {
-    res.status(200).json(livros)
-})
 
 app.get("/livros/:id", (req, res) => {
     const index = BuscaLivros(req.params.id);

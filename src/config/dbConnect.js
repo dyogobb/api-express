@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 async function connectDb() {
 
-    mongoose.connect("mongodb+srv://mongodb:mongodb@cluster0.nvlxnlo.mongodb.net/livraria?retryWrites=true&w=majority")
+    mongoose.connect(process.env.DB_CONNECT_STRING)
 
     return mongoose.connection;
 }
