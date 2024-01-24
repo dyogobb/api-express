@@ -1,5 +1,5 @@
-import bodyParser from "body-parser";
 import livros from "../models/Livros.js";
+import { autor } from "../models/Autor.js";
 
 class LivroController {
 
@@ -28,8 +28,11 @@ class LivroController {
     };
 
     static async cadastrarLivro(req, res) {
+        const novoCadastro = req.body;
         try {
-            const novoLivro = await livros.create(req.body)
+            const autorEncontrado = await autor.findById(novoCadastro.autor);
+            const novoLivro = {...novoCadastro, autor: {...autorEncontrado._doc}}
+            const livroCriado = await livros.create(novoLivro)
             res.status(201).json({
                 message: "Criado com sucesso",
                 livro: novoLivro,
